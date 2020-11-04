@@ -18,4 +18,34 @@
         tools:itemCount="10"
         tools:listitem="@layout/item_gif" />
 
+    <ProgressBar
+        android:id="@+id/pgb_trending"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/rv_gifs"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/rv_gifs"
+        app:layout_constraintTop_toTopOf="@+id/rv_gifs" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txt_result_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/no_gifs_found"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/rv_gifs"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_try_again"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/try_again"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@+id/txt_result_message"
+        app:layout_constraintStart_toStartOf="@+id/txt_result_message"
+        app:layout_constraintTop_toBottomOf="@+id/txt_result_message" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -11,21 +11,12 @@ import kotlinx.android.synthetic.main.item_gif.view.*
 
 class TrendingAdapter : RecyclerView.Adapter<TrendingAdapter.TrendingViewHolder>() {
 
-    private val gifs = arrayListOf(
-        Gif("1", "Gif1"),
-        Gif("1", "Gif1"),
-        Gif("1", "Gif1"),
-        Gif("1", "Gif1"),
-        Gif("1", "Gif1"),
-        Gif("1", "Gif1"),
-        Gif("1", "Gif1"),
-        Gif("1", "Gif1"),
-        Gif("1", "Gif1"),
-        Gif("1", "Gif1"),
-        Gif("1", "Gif1"),
-        Gif("1", "Gif1"),
-        Gif("1", "Gif1"),
-    )
+    private val gifs = arrayListOf<Gif>()
+
+    fun updateGifs(gifs: List<Gif>) {
+        this.gifs.addAll(gifs)
+        notifyDataSetChanged()
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TrendingViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_gif, parent, false)
@@ -42,7 +33,9 @@ class TrendingAdapter : RecyclerView.Adapter<TrendingAdapter.TrendingViewHolder>
 
         fun onBind(gif: Gif) {
             with(itemView) {
-                Glide.with(itemView.context).asGif().load("https://media.giphy.com/media/xUOxfolJrVBce4RNAI/giphy.gif").into(img_gif)
+                gif.images?.original?.let {
+                    Glide.with(itemView.context).asGif().load(it.url).into(img_gif)
+                }
             }
         }
 

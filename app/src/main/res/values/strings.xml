@@ -2,4 +2,7 @@
     <string name="app_name">Gifs</string>
     <string name="trending">Trending</string>
     <string name="favourite">Favourite</string>
+    <string name="no_gifs_found">No Gifs found</string>
+    <string name="something_went_wrong">Something went wrong, please try again</string>
+    <string name="try_again">Try again</string>
 </resources>

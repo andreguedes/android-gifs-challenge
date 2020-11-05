@@ -13,7 +13,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/src_trending"
         app:spanCount="2"
         tools:itemCount="10"
         tools:listitem="@layout/item_gif" />
@@ -47,5 +47,13 @@
         app:layout_constraintEnd_toEndOf="@+id/txt_result_message"
         app:layout_constraintStart_toStartOf="@+id/txt_result_message"
         app:layout_constraintTop_toBottomOf="@+id/txt_result_message" />
+
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/src_trending"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

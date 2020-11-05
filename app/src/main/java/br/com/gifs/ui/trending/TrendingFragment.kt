@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
@@ -20,8 +21,8 @@ class TrendingFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View = inflater.inflate(R.layout.fragment_trending, container, false)
 
-    override fun onResume() {
-        super.onResume()
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
 
         initUI()
         initData()
@@ -39,19 +40,42 @@ class TrendingFragment : Fragment() {
         btn_try_again.setOnClickListener {
             initData()
         }
+
+        src_trending.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                query?.let {
+                    trendingViewModel.getTrendingSearch(it)
+                }
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                newText?.let {
+                    if (it.isEmpty()) {
+                        src_trending.clearFocus()
+                        initData()
+                    }
+                }
+                return false
+            }
+        })
     }
 
     private fun initData() {
+        statusProgress(true)
         clearMessage()
 
         trendingViewModel.getTrending()
         trendingViewModel.viewState.observe(this, {
             when (it) {
-                is TrendingViewState.TrendingList -> trendingAdapter.updateGifs(it.trendingList)
+                is TrendingViewState.TrendingList -> {
+                    trendingAdapter.clearGifs()
+                    trendingAdapter.updateGifs(it.trendingList)
+                }
                 is TrendingViewState.EmptyTrendingList -> showEmptyResultMessage()
                 else -> showErrorMessage()
             }
-            hideProgress()
+            statusProgress(false)
         })
     }
 
@@ -71,8 +95,8 @@ class TrendingFragment : Fragment() {
         btn_try_again.visibility = View.GONE
     }
 
-    private fun hideProgress() {
-        pgb_trending.visibility = View.GONE
+    private fun statusProgress(showing: Boolean) {
+        pgb_trending.visibility = if (showing) View.VISIBLE else View.GONE
     }
 
 }

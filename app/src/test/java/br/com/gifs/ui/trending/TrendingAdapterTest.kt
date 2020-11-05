@@ -34,4 +34,14 @@ class TrendingAdapterTest {
         assertEquals(0, adapter.itemCount)
     }
 
+    @Test
+    fun shouldReturnGifEmptyListWhenAdapterClearIsCalled() {
+        adapter.updateGifs(GifMock.getTrendingData())
+        verify { adapter.notifyDataSetChanged() }
+
+        adapter.clearGifs()
+
+        assertEquals(0, adapter.itemCount)
+    }
+
 }

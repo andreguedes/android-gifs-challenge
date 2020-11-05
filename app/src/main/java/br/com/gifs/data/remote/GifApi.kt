@@ -12,4 +12,10 @@ interface GifApi {
         @Query("rating") rating: String
     ): Response<TrendingResponse>
 
+    @GET("/v1/gifs/search")
+    suspend fun getTrendingSearch(
+        @Query("q") query: String,
+        @Query("rating") rating: String
+    ): Response<TrendingResponse>
+
 }

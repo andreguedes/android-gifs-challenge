@@ -11,10 +11,15 @@ import kotlinx.android.synthetic.main.item_gif.view.*
 
 class TrendingAdapter : RecyclerView.Adapter<TrendingAdapter.TrendingViewHolder>() {
 
-    private val gifs = arrayListOf<Gif>()
+    private val gifs = mutableListOf<Gif>()
 
     fun updateGifs(gifs: List<Gif>) {
         this.gifs.addAll(gifs)
+        notifyDataSetChanged()
+    }
+
+    fun clearGifs() {
+        this.gifs.clear()
         notifyDataSetChanged()
     }
 

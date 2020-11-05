@@ -10,4 +10,8 @@ class GifRepository(private val gifService: GifService) {
         return gifService.getService().getTrending(rating)
     }
 
+    suspend fun getTrendingSearch(query: String, rating: String): Response<TrendingResponse> {
+        return gifService.getService().getTrendingSearch(query, rating)
+    }
+
 }

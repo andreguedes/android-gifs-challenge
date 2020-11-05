@@ -22,18 +22,14 @@ class TrendingViewModel(
     fun getTrending() {
         scope.launch {
             val response = gifRepository.getTrending(BuildConfig.RATING)
-            response.let {
-                handleTrendingResponse(it)
-            }
+            handleTrendingResponse(response)
         }
     }
 
     fun getTrendingSearch(query: String) {
         scope.launch {
             val response = gifRepository.getTrendingSearch(query, BuildConfig.RATING)
-            response.let {
-                handleTrendingResponse(it)
-            }
+            handleTrendingResponse(response)
         }
     }
 

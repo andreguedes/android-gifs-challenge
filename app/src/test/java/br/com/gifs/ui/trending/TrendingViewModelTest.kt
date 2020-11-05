@@ -60,8 +60,46 @@ class TrendingViewModelTest {
         assertEquals(viewModel.viewState.value, expectedTrendingResponseState)
     }
 
+    @Test
+    fun shouldReturnTrendingSearchResponseResultWhenViewModelExposeTrendingListViewState() {
+        val trendingResponse = TrendingResponse(GifMock.getTrendingData())
+        val expectedTrendingResponseState = TrendingViewState.TrendingList(trendingResponse.data)
+
+        coEvery { repositoryMock.getTrendingSearch(QUERY, RATING) } returns Response.success(trendingResponse)
+
+        viewModel.getTrendingSearch(QUERY)
+
+        assertEquals(viewModel.viewState.value, expectedTrendingResponseState)
+    }
+
+    @Test
+    fun shouldReturnEmptySearchResultWhenViewModelExposeEmptyListViewState() {
+        val trendingResponse = TrendingResponse(GifMock.getEmptyTrendingData())
+        val expectedTrendingResponseState = TrendingViewState.EmptyTrendingList
+
+        coEvery { repositoryMock.getTrendingSearch(QUERY, RATING) } returns Response.success(trendingResponse)
+
+        viewModel.getTrendingSearch(QUERY)
+
+        assertEquals(viewModel.viewState.value, expectedTrendingResponseState)
+    }
+
+    @Test
+    fun shouldReturnErrorSearchWhenViewModelExposeErrorViewState() {
+        val mockBody = "{\"message\":\"Something went wrong\"}".toResponseBody("application/json".toMediaTypeOrNull())
+        val error = Response.error<TrendingResponse>(401, mockBody)
+        val expectedTrendingResponseState = TrendingViewState.Error
+
+        coEvery { repositoryMock.getTrendingSearch(QUERY, RATING) } returns error
+
+        viewModel.getTrendingSearch(QUERY)
+
+        assertEquals(viewModel.viewState.value, expectedTrendingResponseState)
+    }
+
     companion object {
         private const val RATING = "g"
+        private const val QUERY = "q"
     }
 
 }

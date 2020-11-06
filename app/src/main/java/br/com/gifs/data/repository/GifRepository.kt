@@ -6,12 +6,10 @@ import retrofit2.Response
 
 class GifRepository(private val gifService: GifService) {
 
-    suspend fun getTrending(rating: String): Response<TrendingResponse> {
-        return gifService.getService().getTrending(rating)
-    }
+    suspend fun getTrending(rating: String): Response<TrendingResponse> =
+        gifService.getService().getTrending(rating)
 
-    suspend fun getTrendingSearch(query: String, rating: String): Response<TrendingResponse> {
-        return gifService.getService().getTrendingSearch(query, rating)
-    }
+    suspend fun getTrendingSearch(query: String, rating: String): Response<TrendingResponse> =
+        gifService.getService().getTrendingSearch(query, rating)
 
 }

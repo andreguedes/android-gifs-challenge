@@ -1,5 +1,6 @@
 package br.com.gifs
 
+import br.com.gifs.data.local.entity.GifEntity
 import br.com.gifs.data.model.Gif
 import br.com.gifs.data.model.Images
 import br.com.gifs.data.model.Original
@@ -17,5 +18,15 @@ object GifMock {
     }
 
     fun getEmptyTrendingData() = listOf<Gif>()
+
+    fun getGifListEntityData(): List<GifEntity> {
+        return listOf(
+            GifEntity("1", "First Gif", "http://first.com/img"),
+            GifEntity("2", "Second Gif", "http://second.com/img"),
+            GifEntity("3", "Third Gif", "http://third.com/img")
+        )
+    }
+
+    fun getEmptyGifData() = listOf<GifEntity>()
 
 }

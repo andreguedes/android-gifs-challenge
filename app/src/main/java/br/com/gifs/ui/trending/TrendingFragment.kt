@@ -69,6 +69,7 @@ class TrendingFragment : Fragment() {
         trendingViewModel.viewState.observe(this, {
             when (it) {
                 is TrendingViewState.TrendingList -> {
+                    clearMessage()
                     trendingAdapter.clearGifs()
                     trendingAdapter.updateGifs(it.trendingList)
                 }
@@ -80,11 +81,13 @@ class TrendingFragment : Fragment() {
     }
 
     private fun showEmptyResultMessage() {
+        trendingAdapter.clearGifs()
         txt_result_message.text = getString(R.string.no_gifs_found)
         txt_result_message.visibility = View.VISIBLE
     }
 
     private fun showErrorMessage() {
+        trendingAdapter.clearGifs()
         txt_result_message.text = getString(R.string.something_went_wrong)
         txt_result_message.visibility = View.VISIBLE
         btn_try_again.visibility = View.VISIBLE

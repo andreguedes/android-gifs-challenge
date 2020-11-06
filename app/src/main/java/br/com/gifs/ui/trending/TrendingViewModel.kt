@@ -9,10 +9,7 @@ import br.com.gifs.data.repository.GifRepository
 import kotlinx.coroutines.*
 import retrofit2.Response
 
-class TrendingViewModel(
-    private val gifRepository: GifRepository,
-    mainDispatcher: CoroutineDispatcher = Dispatchers.Main
-) : ViewModel() {
+class TrendingViewModel(private val gifRepository: GifRepository, mainDispatcher: CoroutineDispatcher = Dispatchers.Main) : ViewModel() {
 
     private val job = SupervisorJob()
     private val state = MutableLiveData<TrendingViewState>()

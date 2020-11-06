@@ -6,9 +6,11 @@
     android:layout_height="match_parent">
 
     <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txt_result_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/favourite"
+        android:text="@string/no_gifs_found"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

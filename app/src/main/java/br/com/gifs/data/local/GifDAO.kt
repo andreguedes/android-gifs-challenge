@@ -14,7 +14,7 @@ interface GifDAO {
     fun getAll(): Flow<List<GifEntity>>
 
     @Query("SELECT * FROM gifentity WHERE id = :id")
-    fun getGif(id: String): Flow<GifEntity>
+    fun getGif(id: String): Flow<GifEntity?>
 
     @Insert
     suspend fun insert(gif: GifEntity): Void

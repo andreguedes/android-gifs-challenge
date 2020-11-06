@@ -32,7 +32,7 @@ class TrendingViewModelTest {
 
         viewModel.getTrending()
 
-        assertEquals(viewModel.viewState.value, expectedTrendingResponseState)
+        assertEquals(expectedTrendingResponseState, viewModel.viewState.value)
     }
 
     @Test
@@ -44,7 +44,7 @@ class TrendingViewModelTest {
 
         viewModel.getTrending()
 
-        assertEquals(viewModel.viewState.value, expectedTrendingResponseState)
+        assertEquals(expectedTrendingResponseState, viewModel.viewState.value)
     }
 
     @Test
@@ -57,7 +57,7 @@ class TrendingViewModelTest {
 
         viewModel.getTrending()
 
-        assertEquals(viewModel.viewState.value, expectedTrendingResponseState)
+        assertEquals(expectedTrendingResponseState, viewModel.viewState.value)
     }
 
     @Test
@@ -69,7 +69,7 @@ class TrendingViewModelTest {
 
         viewModel.getTrendingSearch(QUERY)
 
-        assertEquals(viewModel.viewState.value, expectedTrendingResponseState)
+        assertEquals(expectedTrendingResponseState, viewModel.viewState.value)
     }
 
     @Test
@@ -81,7 +81,7 @@ class TrendingViewModelTest {
 
         viewModel.getTrendingSearch(QUERY)
 
-        assertEquals(viewModel.viewState.value, expectedTrendingResponseState)
+        assertEquals(expectedTrendingResponseState, viewModel.viewState.value)
     }
 
     @Test
@@ -94,7 +94,53 @@ class TrendingViewModelTest {
 
         viewModel.getTrendingSearch(QUERY)
 
-        assertEquals(viewModel.viewState.value, expectedTrendingResponseState)
+        assertEquals(expectedTrendingResponseState, viewModel.viewState.value)
+    }
+
+    @Test
+    fun shouldReturnValidateSizeTrendingResponseResultWhenViewModelExposeTrendingListViewState() {
+        val trendingResponse = TrendingResponse(GifMock.getTrendingData())
+        val expectedTrendingResponseState = TrendingViewState.TrendingList(trendingResponse.data)
+
+        coEvery { repositoryMock.getTrending(RATING) } returns Response.success(trendingResponse)
+
+        viewModel.getTrending()
+
+        assertEquals(3, expectedTrendingResponseState.trendingList.size)
+    }
+
+    @Test
+    fun shouldReturnValidateInformationsTrendingResponseResultWhenViewModelExposeTrendingListViewState() {
+        val trendingResponse = TrendingResponse(GifMock.getTrendingData())
+        val expectedTrendingResponseState = TrendingViewState.TrendingList(trendingResponse.data)
+
+        coEvery { repositoryMock.getTrending(RATING) } returns Response.success(trendingResponse)
+
+        viewModel.getTrending()
+
+        val trendingList = expectedTrendingResponseState.trendingList
+        assertEquals("1", trendingList[0].id)
+        assertEquals("First Gif", trendingList[0].title)
+        assertEquals("2020-11-03", trendingList[0].trending_datetime)
+        assertEquals("http://url.com/gif.gif", trendingList[0].images?.original?.url)
+        assertEquals("415256426724653", trendingList[0].images?.original?.hash)
+    }
+
+    @Test
+    fun shouldReturnTrendingResponseInformationsResultWhenViewModelExposeTrendingListViewState() {
+        val trendingResponse = GifMock.getTrendingResponse()
+
+        coEvery { repositoryMock.getTrending(RATING) } returns Response.success(trendingResponse)
+
+        viewModel.getTrending()
+
+        assertEquals(3, trendingResponse.data.size)
+        assertEquals(100, trendingResponse.pagination?.total_count)
+        assertEquals(10, trendingResponse.pagination?.count)
+        assertEquals(5, trendingResponse.pagination?.offset)
+        assertEquals(200, trendingResponse.meta?.status)
+        assertEquals("Message", trendingResponse.meta?.msg)
+        assertEquals("415256426724653", trendingResponse.meta?.response_id)
     }
 
     companion object {

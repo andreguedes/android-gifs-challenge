@@ -1,9 +1,8 @@
 package br.com.gifs
 
 import br.com.gifs.data.local.entity.GifEntity
-import br.com.gifs.data.model.Gif
-import br.com.gifs.data.model.Images
-import br.com.gifs.data.model.Original
+import br.com.gifs.data.model.*
+import br.com.gifs.data.model.response.TrendingResponse
 
 object GifMock {
 
@@ -19,6 +18,16 @@ object GifMock {
 
     fun getEmptyTrendingData() = listOf<Gif>()
 
+    fun getTrendingResponse(): TrendingResponse {
+        val pagination = Pagination(100, 10, 5)
+        val meta = Meta(200, "Message", "415256426724653")
+        return TrendingResponse(
+            getTrendingData(),
+            pagination,
+            meta
+        )
+    }
+
     fun getGifListEntityData(): List<GifEntity> {
         return listOf(
             GifEntity("1", "First Gif", "http://first.com/img"),
@@ -28,5 +37,7 @@ object GifMock {
     }
 
     fun getEmptyGifData() = listOf<GifEntity>()
+
+    fun getGifData(id: String): GifEntity? = getGifListEntityData().find { it.id == id }
 
 }

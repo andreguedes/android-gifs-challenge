@@ -1,10 +1,9 @@
 package br.com.gifs.data.local
 
-import android.content.Context
 import br.com.gifs.data.source.DatabaseClient
 
-open class DAOService(private val applicationContext: Context) {
+open class DAOService(private val databaseClient: DatabaseClient) {
 
-    fun getService(): AppDatabase = DatabaseClient.getDatabase(applicationContext)
+    fun getService(): AppDatabase = databaseClient.getDatabase()
 
 }

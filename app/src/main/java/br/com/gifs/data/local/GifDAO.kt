@@ -1,9 +1,6 @@
 package br.com.gifs.data.local
 
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
 import br.com.gifs.data.local.entity.GifEntity
 import kotlinx.coroutines.flow.Flow
 
@@ -16,7 +13,7 @@ interface GifDAO {
     @Query("SELECT * FROM gifentity WHERE id = :id")
     fun getGif(id: String): Flow<GifEntity?>
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(gif: GifEntity): Void
 
     @Delete

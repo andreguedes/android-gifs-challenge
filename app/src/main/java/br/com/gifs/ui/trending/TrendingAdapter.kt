@@ -6,8 +6,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import br.com.gifs.R
 import br.com.gifs.data.model.Gif
-import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.item_gif.view.*
+import br.com.gifs.util.ImageUtil
+import kotlinx.android.synthetic.main.item_trending_gif.view.*
 
 class TrendingAdapter : RecyclerView.Adapter<TrendingAdapter.TrendingViewHolder>() {
 
@@ -24,7 +24,7 @@ class TrendingAdapter : RecyclerView.Adapter<TrendingAdapter.TrendingViewHolder>
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TrendingViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_gif, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_trending_gif, parent, false)
         return TrendingViewHolder(view)
     }
 
@@ -37,10 +37,8 @@ class TrendingAdapter : RecyclerView.Adapter<TrendingAdapter.TrendingViewHolder>
     inner class TrendingViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         fun onBind(gif: Gif) {
-            with(itemView) {
-                gif.images?.original?.let {
-                    Glide.with(itemView.context).asGif().load(it.url).into(img_gif)
-                }
+            gif.images?.original?.let {
+                ImageUtil.loadImage(itemView.img_trending_gif, it.url)
             }
         }
 

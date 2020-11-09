@@ -6,8 +6,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import br.com.gifs.R
 import br.com.gifs.data.local.entity.GifEntity
-import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.item_gif.view.*
+import br.com.gifs.util.ImageUtil
+import kotlinx.android.synthetic.main.item_favourite_gif.view.*
 
 class FavouriteAdapter : RecyclerView.Adapter<FavouriteAdapter.FavouriteViewHolder>() {
 
@@ -18,8 +18,13 @@ class FavouriteAdapter : RecyclerView.Adapter<FavouriteAdapter.FavouriteViewHold
         notifyDataSetChanged()
     }
 
+    fun clearGifs() {
+        this.gifs.clear()
+        notifyDataSetChanged()
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavouriteViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_gif, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_favourite_gif, parent, false)
         return FavouriteViewHolder(view)
     }
 
@@ -32,10 +37,8 @@ class FavouriteAdapter : RecyclerView.Adapter<FavouriteAdapter.FavouriteViewHold
     inner class FavouriteViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         fun onBind(gif: GifEntity) {
-            with(itemView) {
-                gif.url.let {
-                    Glide.with(itemView.context).asGif().load(it).into(img_gif)
-                }
+            gif.url.let {
+                ImageUtil.loadImage(itemView.img_favourite_gif, it)
             }
         }
 

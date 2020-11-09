@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DefaultItemAnimator
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import br.com.gifs.R
 import kotlinx.android.synthetic.main.fragment_trending.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -33,7 +33,7 @@ class TrendingFragment : Fragment() {
 
         rv_gifs.apply {
             itemAnimator = DefaultItemAnimator()
-            this.layoutManager = GridLayoutManager(requireContext(), 2)
+            this.layoutManager = LinearLayoutManager(requireContext())
             adapter = trendingAdapter
         }
 

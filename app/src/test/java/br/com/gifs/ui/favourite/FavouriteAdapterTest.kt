@@ -34,4 +34,14 @@ class FavouriteAdapterTest {
         assertEquals(0, adapter.itemCount)
     }
 
+    @Test
+    fun shouldReturnGifEntityEmptyListWhenAdapterClearIsCalled() {
+        adapter.updateGifs(GifMock.getGifListEntityData())
+        verify { adapter.notifyDataSetChanged() }
+
+        adapter.clearGifs()
+
+        assertEquals(0, adapter.itemCount)
+    }
+
 }

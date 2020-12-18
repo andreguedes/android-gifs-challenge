@@ -32,7 +32,7 @@ class GifRepositoryTest {
         val trendingResponse = GifMock.getTrendingResponse()
         val expectedResponse = Response.success(trendingResponse)
 
-        coEvery { gifApiMock.getTrending("q") } returns expectedResponse
+        coEvery { gifApiMock.getTrending(any()) } returns expectedResponse
 
         val currentResponse = gifRepository.getTrending("q")
         assertEquals(expectedResponse, currentResponse)
@@ -43,7 +43,7 @@ class GifRepositoryTest {
         val trendingResponse = GifMock.getTrendingResponse()
         val expectedResponse = Response.success(trendingResponse)
 
-        coEvery { gifApiMock.getTrendingSearch("query", "q") } returns expectedResponse
+        coEvery { gifApiMock.getTrendingSearch(any(), any()) } returns expectedResponse
 
         val currentResponse = gifRepository.getTrendingSearch("query", "q")
         assertEquals(expectedResponse, currentResponse)

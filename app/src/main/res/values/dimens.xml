@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="tab_height">4dp</dimen>
+    <dimen name="ic_favourite_size">36dp</dimen>
+    <dimen name="margin_medium">16dp</dimen>
 </resources>

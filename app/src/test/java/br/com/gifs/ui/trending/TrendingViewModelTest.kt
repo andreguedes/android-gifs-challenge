@@ -28,7 +28,7 @@ class TrendingViewModelTest {
         val trendingResponse = TrendingResponse(GifMock.getTrendingData())
         val expectedTrendingResponseState = TrendingViewState.TrendingList(trendingResponse.data)
 
-        coEvery { repositoryMock.getTrending(RATING) } returns Response.success(trendingResponse)
+        coEvery { repositoryMock.getTrending(any()) } returns Response.success(trendingResponse)
 
         viewModel.getTrending()
 
@@ -40,7 +40,7 @@ class TrendingViewModelTest {
         val trendingResponse = TrendingResponse(GifMock.getEmptyTrendingData())
         val expectedTrendingResponseState = TrendingViewState.EmptyTrendingList
 
-        coEvery { repositoryMock.getTrending(RATING) } returns Response.success(trendingResponse)
+        coEvery { repositoryMock.getTrending(any()) } returns Response.success(trendingResponse)
 
         viewModel.getTrending()
 
@@ -53,7 +53,7 @@ class TrendingViewModelTest {
         val error = Response.error<TrendingResponse>(401, mockBody)
         val expectedTrendingResponseState = TrendingViewState.Error
 
-        coEvery { repositoryMock.getTrending(RATING) } returns error
+        coEvery { repositoryMock.getTrending(any()) } returns error
 
         viewModel.getTrending()
 
@@ -65,7 +65,7 @@ class TrendingViewModelTest {
         val trendingResponse = TrendingResponse(GifMock.getTrendingData())
         val expectedTrendingResponseState = TrendingViewState.TrendingList(trendingResponse.data)
 
-        coEvery { repositoryMock.getTrendingSearch(QUERY, RATING) } returns Response.success(trendingResponse)
+        coEvery { repositoryMock.getTrendingSearch(any(), any()) } returns Response.success(trendingResponse)
 
         viewModel.getTrendingSearch(QUERY)
 
@@ -77,7 +77,7 @@ class TrendingViewModelTest {
         val trendingResponse = TrendingResponse(GifMock.getEmptyTrendingData())
         val expectedTrendingResponseState = TrendingViewState.EmptyTrendingList
 
-        coEvery { repositoryMock.getTrendingSearch(QUERY, RATING) } returns Response.success(trendingResponse)
+        coEvery { repositoryMock.getTrendingSearch(any(), any()) } returns Response.success(trendingResponse)
 
         viewModel.getTrendingSearch(QUERY)
 
@@ -90,7 +90,7 @@ class TrendingViewModelTest {
         val error = Response.error<TrendingResponse>(401, mockBody)
         val expectedTrendingResponseState = TrendingViewState.Error
 
-        coEvery { repositoryMock.getTrendingSearch(QUERY, RATING) } returns error
+        coEvery { repositoryMock.getTrendingSearch(any(), any()) } returns error
 
         viewModel.getTrendingSearch(QUERY)
 
@@ -102,7 +102,7 @@ class TrendingViewModelTest {
         val trendingResponse = TrendingResponse(GifMock.getTrendingData())
         val expectedTrendingResponseState = TrendingViewState.TrendingList(trendingResponse.data)
 
-        coEvery { repositoryMock.getTrending(RATING) } returns Response.success(trendingResponse)
+        coEvery { repositoryMock.getTrending(any()) } returns Response.success(trendingResponse)
 
         viewModel.getTrending()
 
@@ -114,7 +114,7 @@ class TrendingViewModelTest {
         val trendingResponse = TrendingResponse(GifMock.getTrendingData())
         val expectedTrendingResponseState = TrendingViewState.TrendingList(trendingResponse.data)
 
-        coEvery { repositoryMock.getTrending(RATING) } returns Response.success(trendingResponse)
+        coEvery { repositoryMock.getTrending(any()) } returns Response.success(trendingResponse)
 
         viewModel.getTrending()
 
@@ -130,7 +130,7 @@ class TrendingViewModelTest {
     fun shouldReturnTrendingResponseInformationsResultWhenViewModelExposeTrendingListViewState() {
         val trendingResponse = GifMock.getTrendingResponse()
 
-        coEvery { repositoryMock.getTrending(RATING) } returns Response.success(trendingResponse)
+        coEvery { repositoryMock.getTrending(any()) } returns Response.success(trendingResponse)
 
         viewModel.getTrending()
 
@@ -144,7 +144,6 @@ class TrendingViewModelTest {
     }
 
     companion object {
-        private const val RATING = "g"
         private const val QUERY = "q"
     }
 
